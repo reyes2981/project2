@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api")
 public class RoleController {
 
-    @GetMapping(path = "/hello-world/")
+    @GetMapping(path = "api/hello-world/")
     public String getHelloWorld() {
         return "Hello World!";
     }

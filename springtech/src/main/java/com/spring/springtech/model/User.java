@@ -44,6 +44,18 @@ public class User {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Role> roleList;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public UserProfile getUserProfile() {
         return userProfile;
     }

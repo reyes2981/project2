@@ -18,7 +18,7 @@ public class RoleController {
     private RoleService roleService;
 
     @Autowired
-    public void setCategoryService(RoleService roleService) {
+    public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
     }
 
@@ -52,44 +52,44 @@ public class RoleController {
         return roleService.deleteRole(roleId);
     }
 
-//    @PostMapping("/roles/{roleId}/users")
-//    public Recipe createCategoryRecipe(
-//            @PathVariable(value = "categoryId") Long categoryId, @RequestBody Recipe recipeObject) {
-//        System.out.println("calling createCategoryRecipe ==>");
-//        return categoryService.createCategoryRecipe(categoryId, recipeObject);
-//    }
-//
-//    @GetMapping("/roles/{categoryId}/recipes")
-//    public List<Recipe> getCategoryRecipes(@PathVariable(value = "categoryId") Long categoryId) {
-//        System.out.println("calling getCategoryRecipes ==>");
-//        return categoryService.getCategoryRecipes(categoryId);
-//    }
-//
-//    @GetMapping("/roles/{categoryId}/recipes/{recipeId}")
-//    public Recipe getCategoryRecipe(
-//            @PathVariable(value = "categoryId") Long categoryId, @PathVariable(value = "recipeId") Long recipeId) {
-//        System.out.println("calling getCategoryRecipe ==>");
-//        return categoryService.getCategoryRecipe(categoryId, recipeId);
-//    }
-//
-//    @PutMapping("/roles/{categoryId}/recipes/{recipeId}")
-//
-//    public Recipe updateCategoryRecipe(@PathVariable(value = "categoryId") Long categoryId,
-//                                       @PathVariable(value = "recipeId") Long recipeId,
-//                                       @RequestBody Recipe recipeObject) {
-//        System.out.println("calling getCategoryRecipe ==>");
-//        return categoryService.updateCategoryRecipe(categoryId, recipeId, recipeObject);
-//    }
-//
-//    @DeleteMapping("/roles/{categoryId}/recipes/{recipeId}")
-//    public ResponseEntity<HashMap> deleteCategoryRecipe(
-//            @PathVariable(value = "categoryId") Long categoryId, @PathVariable(value = "recipeId") Long recipeId) {
-//        System.out.println("calling getCategoryRecipe ==>");
-//        categoryService.deleteCategoryRecipe(categoryId, recipeId);
-//        HashMap responseMessage = new HashMap();
-//        responseMessage.put("status", "recipe with id: " + recipeId + " was successfully deleted.");
-//        return new ResponseEntity<HashMap>(responseMessage, HttpStatus.OK);
-//    }
+    @PostMapping("/roles/{roleId}/users")
+    public Recipe createCategoryRecipe(
+            @PathVariable(value = "categoryId") Long categoryId, @RequestBody Recipe recipeObject) {
+        System.out.println("calling createCategoryRecipe ==>");
+        return categoryService.createCategoryRecipe(categoryId, recipeObject);
+    }
+
+    @GetMapping("/roles/{categoryId}/recipes")
+    public List<Recipe> getCategoryRecipes(@PathVariable(value = "categoryId") Long categoryId) {
+        System.out.println("calling getCategoryRecipes ==>");
+        return categoryService.getCategoryRecipes(categoryId);
+    }
+
+    @GetMapping("/roles/{categoryId}/recipes/{recipeId}")
+    public Recipe getCategoryRecipe(
+            @PathVariable(value = "categoryId") Long categoryId, @PathVariable(value = "recipeId") Long recipeId) {
+        System.out.println("calling getCategoryRecipe ==>");
+        return categoryService.getCategoryRecipe(categoryId, recipeId);
+    }
+
+    @PutMapping("/roles/{categoryId}/recipes/{recipeId}")
+
+    public Recipe updateCategoryRecipe(@PathVariable(value = "categoryId") Long categoryId,
+                                       @PathVariable(value = "recipeId") Long recipeId,
+                                       @RequestBody Recipe recipeObject) {
+        System.out.println("calling getCategoryRecipe ==>");
+        return categoryService.updateCategoryRecipe(categoryId, recipeId, recipeObject);
+    }
+
+    @DeleteMapping("/roles/{categoryId}/recipes/{recipeId}")
+    public ResponseEntity<HashMap> deleteCategoryRecipe(
+            @PathVariable(value = "categoryId") Long categoryId, @PathVariable(value = "recipeId") Long recipeId) {
+        System.out.println("calling getCategoryRecipe ==>");
+        categoryService.deleteCategoryRecipe(categoryId, recipeId);
+        HashMap responseMessage = new HashMap();
+        responseMessage.put("status", "recipe with id: " + recipeId + " was successfully deleted.");
+        return new ResponseEntity<HashMap>(responseMessage, HttpStatus.OK);
+    }
 }
 
 

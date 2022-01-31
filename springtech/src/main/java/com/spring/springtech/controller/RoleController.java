@@ -4,6 +4,7 @@ import com.spring.springtech.exception.InformationExistException;
 import com.spring.springtech.exception.InformationNotFoundException;
 import com.spring.springtech.model.Role;
 import com.spring.springtech.repository.RoleRepository;
+import com.spring.springtech.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,73 +15,81 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class RoleController {
 
-    //creates a new roleRepository object
-    private RoleRepository roleRepository;
+    private RoleService roleService;
 
-    //dependency injection
     @Autowired
-    public void setRoleRepository(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    public void setCategoryService(RoleService roleService) {
+        this.roleService = roleService;
     }
 
-    @GetMapping("/hello-world/")
-    public String getHelloWorld() {
-        return "Hello World!";
+    @GetMapping("/roles")
+    public List<Role> getRoles() {
+        System.out.println("calling getRoles ==>");
+        return roleService.getRoles();
     }
 
-    @GetMapping("/roles/")
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    @GetMapping(path = "/roles/{rolesId}")
+    public Optional getRole(@PathVariable Long roleId) {
+        System.out.println("calling getRoles ==>");
+        return roleService.getRole(roleId);
     }
 
     @PostMapping("/roles/")
     public Role createRole(@RequestBody Role roleObject) {
-        Role role = roleRepository.findByName(roleObject.getName());
-        if (role != null) {
-            throw new InformationExistException("category with name " + role.getName() + " already exists");
-        } else {
-            return roleRepository.save(roleObject);
-        }
+        System.out.println("calling createRole ==>");
+        return roleService.createRole(roleObject);
     }
 
-    @GetMapping("/roles/{roleId}/")
-    public Optional getRole(@PathVariable(value = "roleId") Long roleId) {
-        Optional role = roleRepository.findById(roleId);
-        if (role.isPresent()) {
-            return role;
-        } else {
-            throw new InformationNotFoundException("role with id " + roleId + " not found");
-        }
-    }
-
-    @PutMapping("/roles/{roleId}/")
+    @PutMapping("/roles/{roleId}")
     public Role updateRole(@PathVariable(value = "roleId") Long roleId, @RequestBody Role roleObject) {
-        Optional<Role> role = roleRepository.findById(roleId);
-        if (role.isPresent()) {
-            if (roleObject.getName().equals(role.get().getName())) {
-                System.out.println("Same");
-                throw new InformationExistException("category " + role.get().getName() + " is already exists");
-            } else {
-                Role updateRole = roleRepository.findById(roleId).get();
-                updateRole.setName(roleObject.getName());
-                return roleRepository.save(updateRole);
-            }
-        } else {
-            throw new InformationNotFoundException("category with id " + roleId + " not found");
-        }
+        System.out.println("calling updateCategory ==>");
+        return roleService.updateRole(roleId, roleObject);
     }
 
-    @DeleteMapping ("/roles/{roleId}/")
+    @DeleteMapping("/roles/{roleId}")
     public Optional<Role> deleteRole(@PathVariable(value = "roleId") Long roleId) {
-        Optional<Role> role = roleRepository.findById(roleId);
-
-        if (role.isPresent()) {
-            roleRepository.deleteById(roleId);
-            return role;
-        } else {
-            throw new InformationNotFoundException("category with id " + roleId + " not found");
-        }
-    }
+        System.out.println("calling deleteRole ==>");
+        return roleService.deleteRole(roleId);
     }
 
+//    @PostMapping("/roles/{roleId}/users")
+//    public Recipe createCategoryRecipe(
+//            @PathVariable(value = "categoryId") Long categoryId, @RequestBody Recipe recipeObject) {
+//        System.out.println("calling createCategoryRecipe ==>");
+//        return categoryService.createCategoryRecipe(categoryId, recipeObject);
+//    }
+//
+//    @GetMapping("/roles/{categoryId}/recipes")
+//    public List<Recipe> getCategoryRecipes(@PathVariable(value = "categoryId") Long categoryId) {
+//        System.out.println("calling getCategoryRecipes ==>");
+//        return categoryService.getCategoryRecipes(categoryId);
+//    }
+//
+//    @GetMapping("/roles/{categoryId}/recipes/{recipeId}")
+//    public Recipe getCategoryRecipe(
+//            @PathVariable(value = "categoryId") Long categoryId, @PathVariable(value = "recipeId") Long recipeId) {
+//        System.out.println("calling getCategoryRecipe ==>");
+//        return categoryService.getCategoryRecipe(categoryId, recipeId);
+//    }
+//
+//    @PutMapping("/roles/{categoryId}/recipes/{recipeId}")
+//
+//    public Recipe updateCategoryRecipe(@PathVariable(value = "categoryId") Long categoryId,
+//                                       @PathVariable(value = "recipeId") Long recipeId,
+//                                       @RequestBody Recipe recipeObject) {
+//        System.out.println("calling getCategoryRecipe ==>");
+//        return categoryService.updateCategoryRecipe(categoryId, recipeId, recipeObject);
+//    }
+//
+//    @DeleteMapping("/roles/{categoryId}/recipes/{recipeId}")
+//    public ResponseEntity<HashMap> deleteCategoryRecipe(
+//            @PathVariable(value = "categoryId") Long categoryId, @PathVariable(value = "recipeId") Long recipeId) {
+//        System.out.println("calling getCategoryRecipe ==>");
+//        categoryService.deleteCategoryRecipe(categoryId, recipeId);
+//        HashMap responseMessage = new HashMap();
+//        responseMessage.put("status", "recipe with id: " + recipeId + " was successfully deleted.");
+//        return new ResponseEntity<HashMap>(responseMessage, HttpStatus.OK);
+//    }
 }
+
+

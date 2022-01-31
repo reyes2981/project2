@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,22 +21,10 @@ public class User {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "category_id")
     private Role role;
 
     public User() {
-    }
-
-    public User(String username) {
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public Long getId() {
@@ -46,6 +35,37 @@ public class User {
         this.id = id;
     }
 
+    public String getusername() {
+        return username;
+    }
 
+    public void setusername(String username) {
+        this.username = username;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                '}';
+    }
+
+    public Role getRole(Role role) {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public boolean getIsPublic() {
+        return isPublic;
+    }
+
+    public void setIsPublic(boolean isPublic) {
+        isPublic = isPublic;
+    }
 }
 

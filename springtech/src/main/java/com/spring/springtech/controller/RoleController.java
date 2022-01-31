@@ -1,10 +1,27 @@
 package com.spring.springtech.controller;
 
+import com.spring.springtech.exception.InformationExistException;
+import com.spring.springtech.exception.InformationNotFoundException;
+import com.spring.springtech.model.Role;
+import com.spring.springtech.repository.RoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class RoleController {
+
+    //creates a new roleRepository object
+    private RoleRepository roleRepository;
+
+    //dependency injection
+    @Autowired
+    public void setRoleRepository(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @GetMapping("/hello-world/")
     public String getHelloWorld() {
@@ -12,28 +29,58 @@ public class RoleController {
     }
 
     @GetMapping("/roles/")
-    public String getAllRoles() {
-        return "all roles";
+    public List<Role> getAllRoles() {
+        return roleRepository.findAll();
     }
 
     @PostMapping("/roles/")
-    public String createRole(@RequestBody String body) {
-        return "creating a role " + body;
+    public Role createRole(@RequestBody Role roleObject) {
+        Role role = roleRepository.findByName(roleObject.getName());
+        if (role != null) {
+            throw new InformationExistException("category with name " + role.getName() + " already exists");
+        } else {
+            return roleRepository.save(roleObject);
+        }
     }
 
     @GetMapping("/roles/{roleId}/")
-    public String getRole(@PathVariable Long roleId) {
-        return "getting the category with id of " + roleId;
+    public Optional getRole(@PathVariable(value = "roleId") Long roleId) {
+        Optional role = roleRepository.findById(roleId);
+        if (role.isPresent()) {
+            return role;
+        } else {
+            throw new InformationNotFoundException("role with id " + roleId + " not found");
+        }
     }
 
     @PutMapping("/roles/{roleId}/")
-    public String updateRole(@PathVariable(value = "roleId") Long roleId, @RequestBody String body) {
-        return "updating the category with id of " + roleId + body;
+    public Role updateRole(@PathVariable(value = "roleId") Long roleId, @RequestBody Role roleObject) {
+        Optional<Role> role = roleRepository.findById(roleId);
+        if (role.isPresent()) {
+            if (roleObject.getName().equals(role.get().getName())) {
+                System.out.println("Same");
+                throw new InformationExistException("category " + role.get().getName() + " is already exists");
+            } else {
+                Role updateRole = roleRepository.findById(roleId).get();
+                updateRole.setName(roleObject.getName());
+                return roleRepository.save(updateRole);
+            }
+        } else {
+            throw new InformationNotFoundException("category with id " + roleId + " not found");
+        }
     }
 
     @DeleteMapping ("/roles/{roleId}/")
-    public String deleteRole(@PathVariable(value = "roleId") Long roleId) {
-        return "deleting the role with id of " + roleId;
+    public Optional<Role> deleteRole(@PathVariable(value = "roleId") Long roleId) {
+        Optional<Role> role = roleRepository.findById(roleId);
+
+        if (role.isPresent()) {
+            roleRepository.deleteById(roleId);
+            return role;
+        } else {
+            throw new InformationNotFoundException("category with id " + roleId + " not found");
+        }
+    }
     }
 
 }

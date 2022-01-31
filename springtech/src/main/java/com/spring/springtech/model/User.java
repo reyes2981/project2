@@ -1,5 +1,11 @@
 package com.spring.springtech.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
     @Id
     @Column
@@ -7,27 +13,39 @@ public class User {
     private Long id;
 
     @Column
-    private String name;
-
-    @Column
-    private String time;
-
-    @Column
-    private Integer portions;
-
-    @Column
-    private String ingredients;
-
-    @Column
-    private String steps;
+    private String username;
 
     @Column
     private boolean isPublic;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    public User() {
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
 }
 

@@ -75,3 +75,4 @@ public class UserProfile {
     public void setProfileDescription(String profileDescription) {
         this.profileDescription = profileDescription;
     }
+}

@@ -1,5 +1,8 @@
 package com.spring.springtech.controller;
 
+import com.spring.springtech.model.Category;
+import com.spring.springtech.repository.CategoryRepository;
+import com.spring.springtech.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +15,13 @@ import java.util.List;
 @RequestMapping(path = "/api")
 public class CategoryController {
 
-    //    private CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
     private CategoryService categoryService;
 
-//    @Autowired
-//    public void setUserRepository(CategoryRepository categoryRepository) {
-//        this.categoryRepository = categoryRepository;
-//    }
+    @Autowired
+    public void setUserRepository(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     @Autowired
     public void setCategoryService(CategoryService categoryService) {

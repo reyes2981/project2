@@ -1,5 +1,6 @@
 package com.spring.springtech.repository;
 
+import com.spring.springtech.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

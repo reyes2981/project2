@@ -1,5 +1,7 @@
 package com.spring.springtech.service;
 
+import com.spring.springtech.exception.InformationExistException;
+import com.spring.springtech.model.User;
 import com.spring.springtech.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

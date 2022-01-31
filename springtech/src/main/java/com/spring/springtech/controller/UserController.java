@@ -1,6 +1,7 @@
 package com.spring.springtech.controller;
 
 import com.spring.springtech.model.User;
+import com.spring.springtech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

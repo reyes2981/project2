@@ -22,7 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
+public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     //dependency injection
     private final UserDetailsService userDetailsService;

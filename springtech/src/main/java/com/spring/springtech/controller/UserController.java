@@ -1,6 +1,5 @@
 package com.spring.springtech.controller;
 
-import com.spring.springtech.model.Request.LoginRequest;
 import com.spring.springtech.model.Role;
 import com.spring.springtech.model.User;
 import com.spring.springtech.service.UserService;
@@ -43,7 +42,7 @@ public class UserController {
 
     @PostMapping("/role/addToUser")
     public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
-        userService.addRoleToUser(form.getEmailAddress(), form.getRoleName());
+        userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
 
@@ -52,6 +51,6 @@ public class UserController {
 
 @Data
 class RoleToUserForm {
-    private String emailAddress;
+    private String username;
     private String roleName;
 }

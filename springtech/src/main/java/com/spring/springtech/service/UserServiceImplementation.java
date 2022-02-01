@@ -30,6 +30,11 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     @Override
+    public UserDetails loadUserByEmailAddress(String emailAddress) throws EmailAddressNotFoundException {
+        return null;
+    }
+
+    @Override
     public Role saveRole(Role role) {
         log.info("Saving a new role to the DB", role.getName());
         return roleRepository.save(role);
@@ -52,8 +57,4 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         return userRepository.findAll();
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
 }

@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Entity @Data @NoArgsConstructor @AllArgsConstructor
-@Table(name= "users")
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id

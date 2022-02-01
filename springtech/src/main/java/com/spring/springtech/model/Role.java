@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity // annotation defines that a class can be mapped to a table.
-@Table(name = "roles") // name of table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

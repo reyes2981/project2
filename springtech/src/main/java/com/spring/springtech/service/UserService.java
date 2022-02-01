@@ -12,7 +12,7 @@ public interface UserService {
     User saveUser(User user);
     Role saveRole(Role role);
     void addRoleToUser(String emailAddress, String roleName);
-    User getUser(String username);
+    User getUser(String emailAddress);
     List<User> getUsers();
 
 

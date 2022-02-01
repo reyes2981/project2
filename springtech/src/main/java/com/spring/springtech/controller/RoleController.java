@@ -6,7 +6,7 @@ import com.spring.springtech.model.Role;
 import com.spring.springtech.model.Submission;
 import com.spring.springtech.repository.CategoryRepository;
 import com.spring.springtech.repository.RoleRepository;
-import com.spring.springtech.service.RoleService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

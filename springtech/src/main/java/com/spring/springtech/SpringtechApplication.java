@@ -24,20 +24,20 @@ public class SpringtechApplication {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    CommandLineRunner run(UserService userService) {
-//        return args -> {
-//            userService.saveRole(new Role(null, "ROLE_USER"));
-//            userService.saveRole(new Role(null, "ROLE_ADMIN"));
-//
-//            userService.saveUser(new User(null, "optimus prime", "prime@gmail.com", "1234", new ArrayList<>()));
-//            userService.saveUser(new User(null, "benjamin sisko", "sisko@yahoo.com", "1234", new ArrayList<>()));
-//            userService.saveUser(new User(null, "christian nodal", "nodal@gmail.com", "1234", new ArrayList<>()));
-//
-//            userService.addRoleToUser("prime@gmail.com", "ROLE_USER");
-//            userService.addRoleToUser("sisko@yahoo.com", "ROLE_ADMIN");
-//            userService.addRoleToUser("nodal@gmail.com", "ROLE_USER");
-//        };
-//    }
+    @Bean
+    CommandLineRunner run(UserService userService) {
+        return args -> {
+            userService.saveRole(new Role(null, "ROLE_USER"));
+            userService.saveRole(new Role(null, "ROLE_ADMIN"));
+
+            userService.saveUser(new User(null, "optimusprime456", "prime@gmail.com", "1234", new ArrayList<>()));
+            userService.saveUser(new User(null, "benjaminsisko123", "sisko@yahoo.com", "1234", new ArrayList<>()));
+            userService.saveUser(new User(null, "christiannodal789", "nodal@gmail.com", "1234", new ArrayList<>()));
+
+            userService.addRoleToUser("optimusprime456", "ROLE_USER");
+            userService.addRoleToUser("benjaminsisko123", "ROLE_ADMIN");
+            userService.addRoleToUser("christiannodal789", "ROLE_USER");
+        };
+    }
 
 }

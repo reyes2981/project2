@@ -1,5 +1,6 @@
 package com.spring.springtech.security;
 
+import com.spring.springtech.filter.CustomAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,7 +41,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().anyRequest().permitAll();
-        http.addFilter(null);
+        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 }

@@ -1,18 +1,9 @@
 package com.spring.springtech.service;
 
-import com.spring.springtech.exception.InformationExistException;
-import com.spring.springtech.exception.InformationNotFoundException;
 import com.spring.springtech.model.Category;
 import com.spring.springtech.model.Submission;
 import com.spring.springtech.repository.CategoryRepository;
 import com.spring.springtech.repository.SubmissionRepository;
-import com.spring.springtech.security.MyUserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 //@Service
 //public class CategoryService {

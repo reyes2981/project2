@@ -1,6 +1,9 @@
 package com.spring.springtech;
 
-
+import com.spring.springtech.model.Role;
+import com.spring.springtech.model.User;
+import com.spring.springtech.service.UserService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +20,7 @@ public class SpringtechApplication {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

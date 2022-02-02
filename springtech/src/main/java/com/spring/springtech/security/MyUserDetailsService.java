@@ -1,25 +1,67 @@
 package com.spring.springtech.security;
 
+import com.spring.springtech.model.User;
 import com.spring.springtech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
-public class MyUserDetailsService implements UserDetailsService {
-    private UserService userService;
+import java.util.Collection;
+import java.util.HashSet;
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+class MyUserDetails implements UserDetails {
+
+    private User user;
+    private String userName;
+    private String password;
+    private String emailAddress;
+
+    public MyUserDetails(User user) {
+        this.user = user;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userService.findUserByEmailAddress(email);
-        return new MyUserDetails(user);
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        return new HashSet<GrantedAuthority>();
+    }
+
+    @Override
+    public String getPassword(){
+        return user.getPassword();
+    }
+
+    @Override
+    public String getUsername(){
+        return user.getEmailAddress();
+    }
+
+    @Override
+    public boolean isAccountNonExpired(){
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
+
+
 

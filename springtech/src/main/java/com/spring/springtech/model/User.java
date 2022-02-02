@@ -46,6 +46,15 @@ public class User {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList();
     }
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+
 
 }
 

@@ -20,7 +20,7 @@ public class SpringtechApplication {
     }
 
     @Bean
-    BCryptPasswordEncoder bCryptPasswordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

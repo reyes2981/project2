@@ -22,10 +22,10 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     //dependency injection
-    @Autowired
+    //@Autowired
     private final UserDetailsService userDetailsService;
 
-    @Autowired
+    //@Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override

@@ -35,21 +35,21 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         return userRepository.save(user);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username);
-        if (user == null) {
-            log.error("User not found in the DB");
-            throw new UsernameNotFoundException("username not found in the DB");
-        } else {
-            log.error("User found in the DB: {}", username);
-        }
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findUserByUsername(username);
+//        if (user == null) {
+//            log.error("User not found in the DB");
+//            throw new UsernameNotFoundException("username not found in the DB");
+//        } else {
+//            log.error("User found in the DB: {}", username);
+//        }
+//        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        user.getRoles().forEach(role -> {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        });
+//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+//    }
 
     @Override
     public Role saveRole(Role role) {
@@ -74,5 +74,30 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         return userRepository.findAll();
     }
 
+    @Override
+    public User findUserByEmailAddress(String email) {
+        return null;
+    }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
+    }
+
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findUserByUsername(username);
+//        if (user == null) {
+//            log.error("User not found in the DB");
+//            throw new UsernameNotFoundException("username not found in the DB");
+//        } else {
+//            log.error("User found in the DB: {}", username);
+//        }
+//        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        user.getRoles().forEach(role -> {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        });
+//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+//    }
 }

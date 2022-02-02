@@ -37,12 +37,12 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
             log.error("User not found in the DB");
             throw new UsernameNotFoundException("username not found in the DB");
         } else {
-            log.error("User found in the DB: {}", username);
+            log.info("User found in the DB: {}", username);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
@@ -59,20 +59,21 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        User user = userRepository.findUserByUsername(username);
+        User user = userRepository.findByUsername(username);
         Role role = roleRepository.findByName(roleName);
         user.getRoles().add(role);
     }
 
     @Override
     public User getUser(String username) {
-        return userRepository.findUserByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
 
 
 }
